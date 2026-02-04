@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>For Mannat ❤️</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            overflow: hidden;
+            background-color: #e0f7fa; 
+            font-family: 'Arial Black', sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+
+        /* Floating Hearts */
+        .heart {
+            position: absolute;
+            color: #ff4d6d;
+            font-size: 20px;
+            user-select: none;
+            animation: float 4s linear infinite;
+            z-index: 1;
+        }
+
+        @keyframes float {
+            0% { transform: translateY(110vh) scale(1); opacity: 1; }
+            100% { transform: translateY(-10vh) scale(1.5); opacity: 0; }
+        }
+
+        #main-card {
+            background: rgba(255, 255, 255, 0.95);
+            padding: 50px;
+            border-radius: 40px;
+            box-shadow: 0 15px 35px rgba(0, 100, 150, 0.2);
+            text-align: center;
+            z-index: 10;
+            border: 8px solid #ff4d6d;
+            width: 500px;
+            position: relative;
+        }
+
+        h1 {
+            color: #d63384;
+            font-size: 2.5rem;
+            margin-bottom: 30px;
+            line-height: 1.2;
+        }
+
+        .btn-wrap {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100px;
+            gap: 20px;
+        }
+
+        button {
+            padding: 15px 40px;
+            font-size: 1.5rem;
+            border: none;
+            border-radius: 20px;
+            cursor: pointer;
+            font-weight: bold;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+        }
+
+        #yesBtn {
+            background-color: #ff4d6d;
+            color: white;
+            z-index: 11;
+        }
+
+        #noBtn {
+            background-color: #6c757d;
+            color: white;
+            position: absolute; /* Changed to absolute to allow jumping */
+            left: 320px; /* Starting position next to Yes */
+            top: 195px;  /* Starting height alignment */
+            z-index: 12;
+            transition: 0.1s ease;
+        }
+
+        #celebration {
+            display: none;
+        }
+
+        .graffiti {
+            position: fixed;
+            font-family: 'Brush Script MT', cursive;
+            color: #0077be;
+            opacity: 0.4;
+            pointer-events: none;
+            z-index: 5;
+        }
+
+        .otter-gif {
+            border-radius: 20px;
+            margin-top: 20px;
+            box-shadow: 0 10px 20px rgba(0,0,0,0.2);
+        }
+    </style>
+</head>
+<body>
+
+    <div id="main-card">
+        <div id="question-area">
+            <h1>MANNAT(my wish), <br> WILL YOU BE MY VALENTINE?</h1>
+            <div class="btn-wrap">
+                <button id="yesBtn" onclick="celebrate()">YES</button>
+                <button id="noBtn" onmouseover="moveNo()" onclick="moveNo()">NO</button>
+            </div>
+        </div>
+
+        <div id="celebration">
+            <h1 style="font-size: 2.8rem;">I KNEW YOU LOVE ME! ❤️</h1>
+            <img class="otter-gif" src="https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExbHZta3N2cDZ5MGNtMmE1ZGp4NzZxbnhpZHhyMXo5MG52bWk5NWNnMiZlcD12MV9naWZzX3NlYXJjaCZjdD1n/103WhAXlgpScG4/giphy.gif" width="300" alt="Cute Sea Otter">
+            <p style="color: #0077be; font-size: 1.3rem; margin-top: 15px;">You're my significant otter!</p>
+        </div>
+    </div>
+
+    <script>
+        // Floating hearts generator
+        function createHeart() {
+            const heart = document.createElement('div');
+            heart.classList.add('heart');
+            heart.innerHTML = '❤️';
+            heart.style.left = Math.random() * 100 + 'vw';
+            heart.style.animationDuration = (Math.random() * 2 + 3) + 's';
+            document.body.appendChild(heart);
+            setTimeout(() => heart.remove(), 4000);
+        }
+        setInterval(createHeart, 250);
+
+        // Make the NO button run away
+        function moveNo() {
+            const btn = document.getElementById('noBtn');
+            // Calculated move range to stay visible on screen but move far from cursor
+            const x = Math.random() * (window.innerWidth - btn.offsetWidth);
+            const y = Math.random() * (window.innerHeight - btn.offsetHeight);
+            btn.style.left = x + 'px';
+            btn.style.top = y + 'px';
+        }
+
+        // Celebration logic
+        function celebrate() {
+            document.getElementById('question-area').style.display = 'none';
+            document.getElementById('celebration').style.display = 'block';
+            
+            const phrases = ["MANNAT", "OTTERLY IN LOVE", "MY VALENTINE", "❤️", "XOXO", "MINE"];
+            for (let i = 0; i < 50; i++) {
+                const g = document.createElement('div');
+                g.className = 'graffiti';
+                g.innerHTML = phrases[Math.floor(Math.random() * phrases.length)];
+                g.style.left = Math.random() * 90 + 'vw';
+                g.style.top = Math.random() * 90 + 'vh';
+                g.style.fontSize = (Math.random() * 20 + 20) + 'px';
+                g.style.transform = `rotate(${Math.random() * 40 - 20}deg)`;
+                document.body.appendChild(g);
+            }
+        }
+    </script>
+</body>
+</html>
